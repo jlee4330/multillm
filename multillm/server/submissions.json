@@ -82,5 +82,19 @@
       "emotion": "슬픔",
       "emotionReason": "App.jsx:78 Error: HTTP 404\n    at App.jsx:64:17\n(anonymous)\t@\tApp.jsx:78"
     }
+  },
+  {
+    "id": 1768388537380,
+    "receivedAt": "2026-01-14T11:02:17.380Z",
+    "payload": {
+      "name": "DG",
+      "modelUsed": "asd",
+      "whyModel": "asd",
+      "purpose": "asd",
+      "satisfaction": 5,
+      "satisfactionReason": "asd",
+      "emotion": "평온",
+      "emotionReason": "sad"
+    }
   }
 ]

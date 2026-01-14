@@ -4,9 +4,9 @@ const filterInput = document.getElementById('filterInput');
 const refreshBtn = document.getElementById('refreshBtn');
 const exportBtn = document.getElementById('exportBtn');
 
-// If the admin page is served from the Vite dev server (5173),
-// requests should target the backend at port 4000. Otherwise use same-origin.
-const API_BASE = (location.port === '5173') ? 'http://localhost:4000' : ''
+// If the admin page is served on localhost and not on the backend port (4000),
+// point requests to the backend at http://localhost:4000. Otherwise use same-origin.
+const API_BASE = (location.hostname === 'localhost' && location.port && location.port !== '4000') ? 'http://localhost:4000' : ''
 
 async function fetchSubmissions() {
   try {
