@@ -13,28 +13,44 @@ const API_BASE = (location.hostname === 'localhost' && location.port && location
 const SUPABASE_URL = 'https://cmmilcmoozhnbgmyooug.supabase.co'
 const SUPABASE_KEY = 'sb_publishable_lOqiyJNJB3YD0EBJLHME2w_Lfyeigp8'
 
+async function fetchFromApi() {
+  const url = `${API_BASE}/api/submissions` || '/api/submissions'
+  const res = await fetch(url, { headers: { 'Accept': 'application/json' }, cache: 'no-store' })
+  if (!res.ok) throw new Error(`API fetch failed: ${res.status}`)
+  const data = await res.json()
+  return Array.isArray(data) ? data : []
+}
+
+async function fetchFromSupabase() {
+  const url = `${SUPABASE_URL}/rest/v1/submissions?select=id,receivedAt,payload`;
+  const supRes = await fetch(url, {
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+      Accept: 'application/json'
+    },
+    cache: 'no-store'
+  });
+  if (!supRes.ok) {
+    throw new Error(`Supabase fetch failed: ${supRes.status} ${await supRes.text().catch(()=> '')}`)
+  }
+  const data = await supRes.json();
+  return Array.isArray(data) ? data : [];
+}
+
 async function fetchSubmissions() {
-  // Directly fetch from Supabase REST API (publishable key)
   try {
-    const url = `${SUPABASE_URL}/rest/v1/submissions?select=id,receivedAt,payload`;
-    const supRes = await fetch(url, {
-      headers: {
-        apikey: SUPABASE_KEY,
-        Authorization: `Bearer ${SUPABASE_KEY}`,
-        Accept: 'application/json'
-      }
-    });
-    if (!supRes.ok) {
-      console.error('Supabase fetch failed', supRes.status, await supRes.text().catch(()=>'') )
+    // Prefer same-origin API (serverless), fallback to Supabase REST if unavailable
+    return await fetchFromApi()
+  } catch (apiErr) {
+    console.warn('API fetch failed, falling back to Supabase REST', apiErr)
+    try {
+      return await fetchFromSupabase()
+    } catch (supErr) {
+      console.error('Supabase fetch failed', supErr)
       statusEl.textContent = '서버에서 데이터를 가져오는 중 오류가 발생했습니다.';
       return [];
     }
-    const data = await supRes.json();
-    return Array.isArray(data) ? data : [];
-  } catch (err) {
-    console.error('Supabase fetch failed', err);
-    statusEl.textContent = '서버에서 데이터를 가져오는 중 오류가 발생했습니다.';
-    return [];
   }
 }
 
