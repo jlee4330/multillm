@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>설문 제출 관리자</title>
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>설문 제출 관리자</h1>
+      <div class="controls">
+        <input id="filterInput" placeholder="ID로 필터 (예: 1768382672090)" />
+        <button id="refreshBtn">새로고침</button>
+        <button id="exportBtn">CSV로 내보내기</button>
+      </div>
+    </header>
+
+    <section id="status">로딩 중…</section>
+    <section id="list"></section>
+  </main>
+  <script type="module" src="/admin.js"></script>
+</body>
+</html>

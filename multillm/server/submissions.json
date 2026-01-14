@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1768382672090,
+    "receivedAt": "2026-01-14T09:24:32.090Z",
+    "payload": {
+      "name": "asd",
+      "modelUsed": "asd",
+      "whyModel": "asd",
+      "purpose": "asd",
+      "satisfaction": 5,
+      "satisfactionReason": "asd",
+      "emotion": "슬픔",
+      "emotionReason": "asd"
+    }
+  },
+  {
+    "id": 1768382884794,
+    "receivedAt": "2026-01-14T09:28:04.794Z",
+    "payload": {
+      "name": "ㅁㄴㅇ",
+      "modelUsed": "ㅁㄴㅇ",
+      "whyModel": "ㅁㄴㅇ",
+      "purpose": "ㅁㄴㅇ",
+      "satisfaction": 5,
+      "satisfactionReason": "ㅁㄴㅇ",
+      "emotion": "슬픔",
+      "emotionReason": "ㅁㄴㅇ"
+    }
+  },
+  {
+    "id": 1768383290239,
+    "receivedAt": "2026-01-14T09:34:50.239Z",
+    "payload": {
+      "name": "이동건",
+      "modelUsed": "이동건",
+      "whyModel": "이동건",
+      "purpose": "이동건",
+      "satisfaction": 5,
+      "satisfactionReason": "이동건",
+      "emotion": "슬픔",
+      "emotionReason": "이동건"
+    }
+  },
+  {
+    "id": 1768383612197,
+    "receivedAt": "2026-01-14T09:40:12.197Z",
+    "payload": {
+      "name": "ㅁㄴㅇ",
+      "modelUsed": "ㅁㄴㅇ",
+      "whyModel": "ㅁㄴㅇ",
+      "purpose": "ㅁㄴㅇ",
+      "satisfaction": 5,
+      "satisfactionReason": "ㅁㄴㅇ",
+      "emotion": "평온",
+      "emotionReason": "ㅁㄴㅇ"
+    }
+  },
+  {
+    "id": 1768383825980,
+    "receivedAt": "2026-01-14T09:43:45.980Z",
+    "payload": {
+      "name": "ㅁㄴㅇ",
+      "modelUsed": "ㅁㄴㅇ",
+      "whyModel": "ㄴㅁㅇ",
+      "purpose": "ㅁㄴㅇ",
+      "satisfaction": 5,
+      "satisfactionReason": "ㅁㄴㅇ",
+      "emotion": "슬픔",
+      "emotionReason": "ㅁㄴㅇ"
+    }
+  },
+  {
+    "id": 1768384189793,
+    "receivedAt": "2026-01-14T09:49:49.793Z",
+    "payload": {
+      "name": "이동건",
+      "modelUsed": "asd",
+      "whyModel": "asdApp.jsx:78 Error: HTTP 404\n    at App.jsx:64:17\n(anonymous)\t@\tApp.jsx:78",
+      "purpose": "App.jsx:78 Error: HTTP 404\n    at App.jsx:64:17\n(anonymous)\t@\tApp.jsx:78",
+      "satisfaction": 5,
+      "satisfactionReason": "App.jsx:78 Error: HTTP 404\n    at App.jsx:64:17\n(anonymous)\t@\tApp.jsx:78",
+      "emotion": "슬픔",
+      "emotionReason": "App.jsx:78 Error: HTTP 404\n    at App.jsx:64:17\n(anonymous)\t@\tApp.jsx:78"
+    }
+  }
+]
