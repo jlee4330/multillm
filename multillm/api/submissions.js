@@ -9,6 +9,7 @@ function getClient() {
 }
 
 export default async function handler(req, res) {
+  console.log('/api/submissions handler invoked', { method: req.method })
   if (req.method !== 'GET') return res.status(405).json({ ok: false, error: 'Method not allowed' })
 
   const supabase = getClient()

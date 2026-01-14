@@ -51,8 +51,12 @@ function App() {
       emotionReason,
     }
 
+    // Determine API base: use local backend when page served from localhost (dev),
+    // otherwise use same-origin so deployed serverless API is used.
+    const API_BASE = (location.hostname === 'localhost' && location.port && location.port !== '4000') ? 'http://localhost:4000' : ''
+
     setSubmitting(true)
-    fetch('http://localhost:4000/api/submit', {
+    fetch(`${API_BASE}/api/submit`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
