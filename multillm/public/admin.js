@@ -8,14 +8,39 @@ const exportBtn = document.getElementById('exportBtn');
 // point requests to the backend at http://localhost:4000. Otherwise use same-origin.
 const API_BASE = (location.hostname === 'localhost' && location.port && location.port !== '4000') ? 'http://localhost:4000' : ''
 
+// Fallback Supabase info (publishable key) — provided for immediate admin read access.
+// Note: publishable/anon keys are safe for read-only client usage; do NOT use service_role key here.
+const SUPABASE_URL = 'https://cmmilcmoozhnbgmyooug.supabase.co'
+const SUPABASE_KEY = 'sb_publishable_lOqiyJNJB3YD0EBJLHME2w_Lfyeigp8'
+
 async function fetchSubmissions() {
+  // Try serverless API first
   try {
     const res = await fetch(`${API_BASE}/api/submissions`);
-    if (!res.ok) throw new Error(res.statusText || 'Fetch failed');
-    const data = await res.json();
+    if (res.ok) {
+      const data = await res.json();
+      return Array.isArray(data) ? data : [];
+    }
+    console.warn('/api/submissions returned', res.status);
+  } catch (err) {
+    console.warn('Primary API fetch failed:', err && err.message);
+  }
+
+  // Fallback to Supabase REST API
+  try {
+    const url = `${SUPABASE_URL}/rest/v1/submissions?select=id,receivedAt,payload`;
+    const supRes = await fetch(url, {
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        Accept: 'application/json'
+      }
+    });
+    if (!supRes.ok) throw new Error(`Supabase fetch failed: ${supRes.status}`);
+    const data = await supRes.json();
     return Array.isArray(data) ? data : [];
   } catch (err) {
-    console.error(err);
+    console.error('Supabase fallback failed', err);
     statusEl.textContent = '서버에서 데이터를 가져오는 중 오류가 발생했습니다.';
     return [];
   }

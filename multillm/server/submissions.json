@@ -124,5 +124,19 @@
       "emotion": "화남",
       "emotionReason": "ㅁㄴㅇ"
     }
+  },
+  {
+    "id": 1768390046174,
+    "receivedAt": "2026-01-14T11:27:26.174Z",
+    "payload": {
+      "name": "이동건 ",
+      "modelUsed": "ㅁ니ㅏ어",
+      "whyModel": "ㅁ니ㅏ어",
+      "purpose": "ㄴ마어",
+      "satisfaction": 5,
+      "satisfactionReason": "ㄴ미ㅏ어",
+      "emotion": "평온",
+      "emotionReason": "ㅁ니ㅏ어"
+    }
   }
 ]
