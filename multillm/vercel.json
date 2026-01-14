@@ -7,6 +7,8 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/admin.html", "dest": "/admin.html" },
+    { "src": "/admin.js", "dest": "/admin.js" },
+    { "src": "/admin.css", "dest": "/admin.css" },
     { "src": "/assets/(.*)", "dest": "/assets/$1" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
