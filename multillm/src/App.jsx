@@ -8,6 +8,7 @@ function App() {
   const [purpose, setPurpose] = useState('')
   const [satisfaction, setSatisfaction] = useState(5)
   const [satisfactionReason, setSatisfactionReason] = useState('')
+  const [promptUsed, setPromptUsed] = useState('')
   const [emotion, setEmotion] = useState('')
   const [customEmotion, setCustomEmotion] = useState('')
   const [emotionReason, setEmotionReason] = useState('')
@@ -45,6 +46,7 @@ function App() {
       modelUsed,
       whyModel,
       purpose,
+      promptUsed,
       satisfaction,
       satisfactionReason,
       emotion: emotion === '기타' ? customEmotion || '기타' : emotion,
@@ -89,11 +91,15 @@ function App() {
     <div className="survey-root">
       <div className="survey-container">
         <div className="survey-inner">
+          <div className="page-hero">
+            <span className="pill">MLLM Survey</span>
+                   <h1>방금 사용한 MLLM 경험을 공유해주세요</h1>
+                   <p>모델 선택 이유, 만족도, 감정을 간단히 남겨주세요. 연구 용도로만 사용되며, 1분 정도 소요됩니다.</p>
+          </div>
           <form className="form" onSubmit={handleSubmit}>
           <section className="section">
-            <h2 className="section-title">기본 정보</h2>
             <div className="field">
-              <label htmlFor="name">본인 이름</label>
+              <label htmlFor="name">이름</label>
               <input
                 id="name"
                 type="text"
@@ -114,7 +120,7 @@ function App() {
                 type="text"
                 value={modelUsed}
                 onChange={(e) => setModelUsed(e.target.value)}
-                placeholder="예: GPT 5, Gemini 3, Llama, Claude 등"
+                placeholder="예: Gemini3"
               />
               {errors.modelUsed && <p className="error">{errors.modelUsed}</p>}
             </div>
@@ -125,27 +131,37 @@ function App() {
                 id="why"
                 value={whyModel}
                 onChange={(e) => setWhyModel(e.target.value)}
-                placeholder="정확도, 속도, 비용 등 이유를 적어주세요"
+                placeholder="선택 기준(정확도/속도/비용/구체적 기능 지원/가격 등)과 비교 모델을 함께 적어주세요"
               />
             </div>
           </section>
 
         <section className="section">
-          <h2 className="section-title">사용 목적</h2>
+          <h2 className="section-title">모델 사용 목적</h2>
           <div className="field">
             <label htmlFor="purpose">MLLM 사용 목적</label>
             <textarea
               id="purpose"
               value={purpose}
               onChange={(e) => setPurpose(e.target.value)}
-              placeholder="예: 코드 리뷰, 문서 요약, 아이디어 브레인스토밍 등"
+              placeholder="예: 업무(기획/보고서/코드 리뷰), 상담/응대(고객 상담 스크립트, HR/코칭), 학습/연구(논문 요약, 아이디어 검증) 등"
             />
             {errors.purpose && <p className="error">{errors.purpose}</p>}
+          </div>
+
+          <div className="field">
+            <label htmlFor="promptUsed">입력한 프롬프트 (선택)</label>
+            <textarea
+              id="promptUsed"
+              value={promptUsed}
+              onChange={(e) => setPromptUsed(e.target.value)}
+              placeholder='예: "20자 요약" 또는 사용한 대표 프롬프트를 적어주세요'
+            />
           </div>
         </section>
 
         <section className="section">
-          <h2 className="section-title">만족도</h2>
+          <h2 className="section-title">모델 만족도</h2>
           <div className="field">
             <div className="inline">
               <label htmlFor="satisfaction">만족도 (0-10)</label>
