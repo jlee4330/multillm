@@ -14,19 +14,7 @@ const SUPABASE_URL = 'https://cmmilcmoozhnbgmyooug.supabase.co'
 const SUPABASE_KEY = 'sb_publishable_lOqiyJNJB3YD0EBJLHME2w_Lfyeigp8'
 
 async function fetchSubmissions() {
-  // Try serverless API first
-  try {
-    const res = await fetch(`${API_BASE}/api/submissions`);
-    if (res.ok) {
-      const data = await res.json();
-      return Array.isArray(data) ? data : [];
-    }
-    console.warn('/api/submissions returned', res.status);
-  } catch (err) {
-    console.warn('Primary API fetch failed:', err && err.message);
-  }
-
-  // Fallback to Supabase REST API
+  // Directly fetch from Supabase REST API (publishable key)
   try {
     const url = `${SUPABASE_URL}/rest/v1/submissions?select=id,receivedAt,payload`;
     const supRes = await fetch(url, {
@@ -36,11 +24,15 @@ async function fetchSubmissions() {
         Accept: 'application/json'
       }
     });
-    if (!supRes.ok) throw new Error(`Supabase fetch failed: ${supRes.status}`);
+    if (!supRes.ok) {
+      console.error('Supabase fetch failed', supRes.status, await supRes.text().catch(()=>'') )
+      statusEl.textContent = '서버에서 데이터를 가져오는 중 오류가 발생했습니다.';
+      return [];
+    }
     const data = await supRes.json();
     return Array.isArray(data) ? data : [];
   } catch (err) {
-    console.error('Supabase fallback failed', err);
+    console.error('Supabase fetch failed', err);
     statusEl.textContent = '서버에서 데이터를 가져오는 중 오류가 발생했습니다.';
     return [];
   }
