@@ -228,7 +228,7 @@ function App() {
 
             <div className="actions">
               <button type="submit" disabled={submitting}>{submitting ? '저장중...' : '제출'}</button>
-              {success && <p className="success">제출되었습니다 (ID: {submittedId})</p>}
+              {success && <p className="success">제출되었습니다 </p>}
               {error && <p className="error">{error}</p>}
             </div>
           </form>
