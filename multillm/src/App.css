@@ -1,7 +1,7 @@
 
 :root {
-  /* full-page gradient background */
-  background: radial-gradient(circle at 20% 20%, #eef3ff 0, #f7f9fd 25%, #ffffff 60%) no-repeat fixed;
+  /* full-page gradient background (simpler, smoother) */
+  background: radial-gradient(circle at 20% 20%, #eef3ff 0%, #f7f9fd 25%, #ffffff 60%) no-repeat fixed;
 }
 
 .survey-root {
@@ -17,7 +17,7 @@
 
 .survey-container {
   width: 100%;
-  max-width: 1080px;
+  max-width: 1240px;
 }
 
 .survey-inner {
@@ -27,14 +27,14 @@
 /* Center the form content and constrain its width */
 .form {
   width: 100%;
-  max-width: 880px;
+  max-width: 1040px;
   margin: 0 auto;
   display: block;
 }
 
 .page-hero {
   margin: 0 auto 28px;
-  max-width: 880px;
+  max-width: 1040px;
 }
 
 .page-hero .pill {

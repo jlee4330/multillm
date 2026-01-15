@@ -53,9 +53,12 @@ function App() {
       emotionReason,
     }
 
-    // Determine API base: use local backend when page served from localhost (dev),
-    // otherwise use same-origin so deployed serverless API is used.
-    const API_BASE = (location.hostname === 'localhost' && location.port && location.port !== '4000') ? 'http://localhost:4000' : ''
+    // Determine API base:
+    // 1) If VITE_API_BASE is set, always use it (e.g., deployed API while developing locally).
+    // 2) Otherwise, use localhost:4000 when running on localhost (dev server),
+    // 3) Else use same-origin (deployed serverless).
+    const API_BASE = import.meta.env.VITE_API_BASE
+      || ((location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://localhost:4000' : '')
 
     setSubmitting(true)
     fetch(`${API_BASE}/api/submit`, {
@@ -76,6 +79,8 @@ function App() {
         if (data && data.ok) {
           setSubmittedId(data.id)
           setSuccess(true)
+          alert('제출되었습니다.')
+          window.location.reload()
         } else {
           setError('서버에 저장하지 못했습니다.')
         }
@@ -99,13 +104,13 @@ function App() {
           <form className="form" onSubmit={handleSubmit}>
           <section className="section">
             <div className="field">
-              <label htmlFor="name">이름</label>
+              <label htmlFor="name">참여자 아이디</label>
               <input
                 id="name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="이름을 입력하세요"
+                placeholder="아이디를 입력하세요"
               />
               {errors.name && <p className="error">{errors.name}</p>}
             </div>
